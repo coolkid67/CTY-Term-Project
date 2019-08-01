@@ -18,20 +18,19 @@
                 mypre.innerHTML = mypre.innerHTML + text;
             }
             function builtinRead(x) {
-                if ( 
-                     
-                     
-                )
+                if (Sk.builtInFiles === undefined || Sk.builtInFiles["files"][x] === undefined) {
                     throw "File not found: '" + x + "'";
-                return Sk.builtinFiles["files"][x];
-            }
+                } else {
+                    return Sk.builtinFiles["files"][x];
+                };
+            };
             // Here's everything you need to run a python program in skulpt
             // grab the code from your textarea
             // get a reference to your pre element for output
             // configure the output function
             // call Sk.importMainWithBody()
             function runit() {
-                var prog = '
+                var prog = `
                 import pygame
                 
                 
@@ -39,7 +38,7 @@
                 
                 
                 
-                ';
+                `;
                 var mypre = document.getElementById("output");
                 mypre.innerHTML = "";
                 Sk.pre = "output";
