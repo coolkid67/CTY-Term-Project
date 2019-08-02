@@ -205,7 +205,7 @@ class Ptera(pygame.sprite.Sprite):
     def __init__(self,speed=5,sizex=-1,sizey=-1):
         pygame.sprite.Sprite.__init__(self,self.containers)
         self.images,self.rect = load_sprite_sheet('ptera.png',2,1,sizex,sizey,-1)
-        self.rect.centery = height * 0.65
+        self.rect.centery = height * 0.675
         self.rect.left = width + self.rect.width
         self.image = self.images[0]
         self.movement = [-1*speed,0]
