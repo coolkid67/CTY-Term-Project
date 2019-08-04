@@ -1,4 +1,11 @@
 import numpy as np
+import asyncio
+from time import sleep as wait
+
+async def runDino():
+    import dinoSource as dS
+
+asyncio.run(runDino())
 
 def sigmoid(x):
     #f(x) = 1 / (1+e^(-x))
@@ -19,3 +26,5 @@ n = Neuron(weights, bias)
 
 x = np.array([1, -1]) # 1 = ptera, 0 = ground, -1 = cactus
 print(n.feedforward(x))
+wait(3)
+print(dS.isJumping)
