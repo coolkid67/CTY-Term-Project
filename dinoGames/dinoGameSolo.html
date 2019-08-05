@@ -11,6 +11,43 @@
     </head>
     <body>
         <script type="text/javascript">
+
+        var basePath = 'pygame/';
+        Sk.externalLibraries = {
+            'pygame': {
+                path: basePath + '__init__.js',
+            },
+            'pygame.display': {
+                path: basePath + 'display.js',
+            },
+            'pygame.draw': {
+                path: basePath + 'draw.js',
+            },
+            'pygame.event': {
+                path: basePath + 'event.js',
+            },
+            'pygame.font': {
+                path: basePath + 'font.js',
+            },
+            'pygame.image': {
+                path: basePath + 'image.js',
+            },
+            'pygame.key': {
+                path: basePath + 'key.js',
+            },
+            'pygame.mouse': {
+                path: basePath + 'mouse.js',
+            },
+            'pygame.time': {
+                path: basePath + 'time.js',
+            },
+            'pygame.transform': {
+                path: basePath + 'transform.js',
+            },
+            'pygame.version': {
+                path: basePath + 'version.js',
+            },
+        };
             // output functions are configurable.  This one just appends some text
             // to a pre element.
             function outf(text) {
@@ -29,27 +66,30 @@
             // get a reference to your pre element for output
             // configure the output function
             // call Sk.importMainWithBody()
+            
             function runit() {
-                var prog = `
-                import pygame.display
-                `;
-                var mypre = document.getElementById("output");
-                mypre.innerHTML = "";
-                Sk.pre = "output";
-                Sk.configure({ output: outf, read: builtinRead });
-                (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target =
-                    "mycanvas";
-                var myPromise = Sk.misceval.asyncToPromise(function() {
-                    return Sk.importMainWithBody("<stdin>", false, prog, true);
-                });
-                myPromise.then(
-                    function(mod) {
-                        console.log("success");
-                    },
-                    function(err) {
-                        console.log(err.toString());
-                    }
-                );
+                var client = new XMLHttpRequest();
+                client.open('GET', '/foo.txt');
+                client.onreadystatechange = function() {
+                    var prog = client.responseText;
+                    var mypre = document.getElementById("output");
+                    mypre.innerHTML = "";
+                    Sk.pre = "output";
+                    Sk.configure({ output: outf, read: builtinRead });
+                    (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target =
+                        "mycanvas";
+                    var myPromise = Sk.misceval.asyncToPromise(function() {
+                        return Sk.importMainWithBody("<stdin>", false, prog, true);
+                    });
+                    myPromise.then(
+                        function(mod) {
+                            console.log("success");
+                        },
+                        function(err) {
+                            console.log(err.toString());
+                        }
+                    );
+                }
             }
         </script>
         <button type="button" onclick="runit()">Run</button>

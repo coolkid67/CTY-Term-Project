@@ -1,8 +1,12 @@
 import numpy as np
 import asyncio
+import pygame
 from time import sleep as wait
 
+pygame.display.init()
+
 async def runDino():
+    global dS
     import dinoSource as dS
 
 asyncio.run(runDino())
@@ -26,5 +30,4 @@ n = Neuron(weights, bias)
 
 x = np.array([1, -1]) # 1 = ptera, 0 = ground, -1 = cactus
 print(n.feedforward(x))
-wait(3)
 print(dS.isJumping)
