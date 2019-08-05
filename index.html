@@ -7,7 +7,7 @@
                 background-position: center;
                 background-repeat: no-repeat;
             }
-            .button4 {
+            .button {
                 background-color: white;
                 color: black;
                 border: 7px solid #e7e7e7;
@@ -24,19 +24,19 @@
                 margin-top: 100px;
             }
 
-            .button4:hover {
+            .button:hover {
                 background-color: #e7e7e7;
                 box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
                     0 17px 50px 0 rgba(0, 0, 0, 0.19);
             }
-            .button4 span {
+            .button span {
                 cursor: pointer;
                 display: inline-block;
                 position: relative;
                 transition: 0.5s;
             }
 
-            .button4 span:after {
+            .button span:after {
                 content: "\00bb";
                 position: absolute;
                 opacity: 0;
@@ -45,15 +45,15 @@
                 transition: 0.5s;
             }
 
-            .button4:hover span {
+            .button:hover span {
                 padding-right: 70px;
             }
 
-            .button4:hover span:after {
+            .button:hover span:after {
                 opacity: 2;
                 right: 0;
             }
-            .button4:active {
+            .button:active {
                 background-color: #a9a9a9;
                 box-shadow: 0 5px #666;
                 transform: translateY(2px);
@@ -62,13 +62,13 @@
     </head>
     <body>
         <button
-            class="button button4"
+            class="button"
             onclick="window.location.href = 'submenus/playSubmenu.html';"
         >
             <span>play </span>
         </button><br>
-        <button
-            class="button button4"
+        <button 
+        class="button"
             onclick="window.location.href = 'submenus/aiSubmenu.html';"
         >
             <span>AI </span>

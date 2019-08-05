@@ -23,10 +23,6 @@ screen = pygame.display.set_mode(scr_size)
 clock = pygame.time.Clock()
 pygame.display.set_caption("T-Rex Rush")
 
-jump_sound = pygame.mixer.Sound('sprites/jump.wav')
-die_sound = pygame.mixer.Sound('sprites/die.wav')
-checkPoint_sound = pygame.mixer.Sound('sprites/checkPoint.wav')
-
 def load_image(
     name,
     sizex=-1,
@@ -177,9 +173,6 @@ class Dino():
 
         if not self.isDead and self.counter % 7 == 6 and self.isBlinking == False:
             self.score += 1
-            if self.score % 100 == 0 and self.score != 0:
-                if pygame.mixer.get_init() != None:
-                    checkPoint_sound.play()
 
         self.counter = (self.counter + 1)
 
@@ -205,8 +198,7 @@ class Ptera(pygame.sprite.Sprite):
     def __init__(self,speed=5,sizex=-1,sizey=-1):
         pygame.sprite.Sprite.__init__(self,self.containers)
         self.images,self.rect = load_sprite_sheet('ptera.png',2,1,sizex,sizey,-1)
-        self.ptera_height = [height*0.82,height*0.75,height*0.60]
-        self.rect.centery = self.ptera_height[random.randrange(0,3)]
+        self.rect.centery = height * 0.675
         self.rect.left = width + self.rect.width
         self.image = self.images[0]
         self.movement = [-1*speed,0]
@@ -391,8 +383,6 @@ def gameplay():
                         if event.key == pygame.K_SPACE and not playerDino.isDucking:
                             if playerDino.rect.bottom == int(0.98*height):
                                 playerDino.isJumping = True
-                                if pygame.mixer.get_init() != None:
-                                    jump_sound.play()
                                 playerDino.movement[1] = -1*playerDino.jumpSpeed
 
                         if event.key == pygame.K_DOWN:
@@ -406,15 +396,11 @@ def gameplay():
                 c.movement[0] = -1*gamespeed
                 if pygame.sprite.collide_mask(playerDino,c):
                     playerDino.isDead = True
-                    if pygame.mixer.get_init() != None:
-                        die_sound.play()
 
             for p in pteras:
                 p.movement[0] = -1*gamespeed
                 if pygame.sprite.collide_mask(playerDino,p):
                     playerDino.isDead = True
-                    if pygame.mixer.get_init() != None:
-                        die_sound.play()
 
             if len(cacti) < 2:
                 if len(cacti) == 0:

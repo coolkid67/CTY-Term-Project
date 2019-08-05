@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                background-image: url("submenus/backgrounds/mainBackground.jpg");
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+            .button {
+                background-color: white;
+                color: black;
+                border: 7px solid #e7e7e7;
+                font-size: 100px;
+                padding: 50px 100px;
+                border-radius: 100px;
+                transition-duration: 0.3s;
+                transition-duration: 0.3s;
+                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
+                    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                margin-bottom: 100px;
+                margin-left:100px;
+                margin-right:100px;
+                margin-top: 100px;
+            }
+
+            .button:hover {
+                background-color: #e7e7e7;
+                box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+                    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+            }
+            .button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+            .button span:after {
+                content: "\00bb";
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -60px;
+                transition: 0.5s;
+            }
+
+            .button:hover span {
+                padding-right: 70px;
+            }
+
+            .button:hover span:after {
+                opacity: 2;
+                right: 0;
+            }
+            .button:active {
+                background-color: #a9a9a9;
+                box-shadow: 0 5px #666;
+                transform: translateY(2px);
+            }
+        </style>
+    </head>
+    <body>
+        <button
+            class="button"
+            onclick="window.location.href = 'submenus/playSubmenu.html';"
+        >
+            <span>play </span>
+        </button><br>
+        <button
+            class="button"
+            onclick="window.location.href = 'submenus/aiSubmenu.html';"
+        >
+            <span>AI </span>
+        </button>
+    </body>
+</html>
