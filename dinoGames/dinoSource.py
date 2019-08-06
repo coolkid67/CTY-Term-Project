@@ -1,15 +1,12 @@
 __author__ = "Shivam Shekhar"
 
-import os
-import sys
-import pygame
-import random
+import os, pygame, random
 from pygame import *
 
 pygame.mixer.pre_init(44100, -16, 2, 2048) # fix audio delay 
 pygame.init()
 
-scr_size = (width,height) = (600,150)
+scr_size = (width,height) = (650,150)
 FPS = 60
 gravity = 0.6
 
@@ -374,13 +371,26 @@ def gameplay():
                 gameQuit = True
                 gameOver = True
             else:
+                for cactus in cacti:
+                    if (cactus.rect.x - playerDino.rect.x) < 100:
+                        if playerDino.rect.bottom == int(0.98*height) and not playerDino.isDucking:
+                            playerDino.isJumping = True
+                            playerDino.movement[1] = -1*playerDino.jumpSpeed
+                for ptera in pteras:
+                    if (ptera.rect.x - playerDino.rect.x) < 50 and ptera.rect.x > 0:
+                        if not (playerDino.isJumping or playerDino.isDead):
+                            playerDino.isDucking = True
+                    else:
+                        playerDino.isDucking = False
+
+
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         gameQuit = True
                         gameOver = True
 
                     if event.type == pygame.KEYDOWN:
-                        if event.key == pygame.K_SPACE and not playerDino.isDucking:
+                        if (event.key == pygame.K_SPACE) and not playerDino.isDucking:
                             if playerDino.rect.bottom == int(0.98*height):
                                 playerDino.isJumping = True
                                 playerDino.movement[1] = -1*playerDino.jumpSpeed
@@ -414,7 +424,7 @@ def gameplay():
 
             if len(pteras) == 0 and random.randrange(0,200) == 10 and counter > 500:
                 for l in last_obstacle:
-                    if l.rect.right < width*0.8:
+                    if l.rect.right < width * 0.8:
                         last_obstacle.empty()
                         last_obstacle.add(Ptera(gamespeed, 46, 40))
 

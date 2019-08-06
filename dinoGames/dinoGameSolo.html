@@ -12,42 +12,6 @@
     <body>
         <script type="text/javascript">
 
-        var basePath = 'pygame/';
-        Sk.externalLibraries = {
-            'pygame': {
-                path: basePath + '__init__.js',
-            },
-            'pygame.display': {
-                path: basePath + 'display.js',
-            },
-            'pygame.draw': {
-                path: basePath + 'draw.js',
-            },
-            'pygame.event': {
-                path: basePath + 'event.js',
-            },
-            'pygame.font': {
-                path: basePath + 'font.js',
-            },
-            'pygame.image': {
-                path: basePath + 'image.js',
-            },
-            'pygame.key': {
-                path: basePath + 'key.js',
-            },
-            'pygame.mouse': {
-                path: basePath + 'mouse.js',
-            },
-            'pygame.time': {
-                path: basePath + 'time.js',
-            },
-            'pygame.transform': {
-                path: basePath + 'transform.js',
-            },
-            'pygame.version': {
-                path: basePath + 'version.js',
-            },
-        };
             // output functions are configurable.  This one just appends some text
             // to a pre element.
             function outf(text) {
@@ -68,10 +32,53 @@
             // call Sk.importMainWithBody()
             
             function runit() {
+                var basePath = 'pygame/';
+                Sk.externalLibraries = {
+                    'pygame': {
+                        path: basePath + '__init__.js',
+                    },
+                    'pygame.display': {
+                        path: basePath + 'display.js',
+                    },
+                    'pygame.draw': {
+                        path: basePath + 'draw.js',
+                    },
+                    'pygame.event': {
+                        path: basePath + 'event.js',
+                    },
+                    'pygame.font': {
+                        path: basePath + 'font.js',
+                    },
+                    'pygame.image': {
+                        path: basePath + 'image.js',
+                    },
+                    'pygame.key': {
+                        path: basePath + 'key.js',
+                    },
+                    'pygame.mouse': {
+                        path: basePath + 'mouse.js',
+                    },
+                    'pygame.time': {
+                        path: basePath + 'time.js',
+                    },
+                    'pygame.transform': {
+                        path: basePath + 'transform.js',
+                    },
+                    'pygame.version': {
+                        path: basePath + 'version.js',
+                    },
+                };
+
+                Sk.main_canvas = document.createElement("canvas");
+                Sk.main_canvas.parentElement = document.body;
+                console.log(Sk.main_canvas);
+                Sk.main_canvas.style.backgroundColor = "black";
+
                 var client = new XMLHttpRequest();
-                client.open('GET', '/foo.txt');
+                client.open('GET', 'dinoSource.py');
                 client.onreadystatechange = function() {
                     var prog = client.responseText;
+                    console.log(prog);
                     var mypre = document.getElementById("output");
                     mypre.innerHTML = "";
                     Sk.pre = "output";
@@ -94,5 +101,6 @@
         </script>
         <button type="button" onclick="runit()">Run</button>
         <pre id="output"></pre>
+        <div class = ""></div>
     </body>
 </html>
