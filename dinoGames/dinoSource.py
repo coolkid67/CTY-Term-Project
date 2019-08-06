@@ -6,7 +6,7 @@ from pygame import *
 pygame.mixer.pre_init(44100, -16, 2, 2048) # fix audio delay 
 pygame.init()
 
-scr_size = (width,height) = (2500,150)
+scr_size = (width,height) = (650,150)
 FPS = 60
 gravity = 0.6
 
