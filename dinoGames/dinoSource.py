@@ -6,7 +6,7 @@ from pygame import *
 pygame.mixer.pre_init(44100, -16, 2, 2048) # fix audio delay 
 pygame.init()
 
-scr_size = (width,height) = (650,150)
+scr_size = (width,height) = (2500,150)
 FPS = 60
 gravity = 0.6
 
@@ -20,13 +20,7 @@ screen = pygame.display.set_mode(scr_size)
 clock = pygame.time.Clock()
 pygame.display.set_caption("T-Rex Rush")
 
-def load_image(
-    name,
-    sizex=-1,
-    sizey=-1,
-    colorkey=None,
-    ):
-
+def load_image (name, sizex = -1, sizey = -1, colorkey=None):
     fullname = os.path.join('sprites', name)
     image = pygame.image.load(fullname)
     image = image.convert()
@@ -329,6 +323,7 @@ def introscreen():
             gameStart = True
 
 def gameplay():
+    aiActivated = True
     global high_score
     gamespeed = 4
     startMenu = False
@@ -371,17 +366,18 @@ def gameplay():
                 gameQuit = True
                 gameOver = True
             else:
-                for cactus in cacti:
-                    if (cactus.rect.x - playerDino.rect.x) < 100:
-                        if playerDino.rect.bottom == int(0.98*height) and not playerDino.isDucking:
-                            playerDino.isJumping = True
-                            playerDino.movement[1] = -1*playerDino.jumpSpeed
-                for ptera in pteras:
-                    if (ptera.rect.x - playerDino.rect.x) < 50 and ptera.rect.x > 0:
-                        if not (playerDino.isJumping or playerDino.isDead):
-                            playerDino.isDucking = True
-                    else:
-                        playerDino.isDucking = False
+                if aiActivated:
+                    for cactus in cacti:
+                        if (cactus.rect.x - playerDino.rect.x) < 25 * gamespeed and cactus.rect.x > 0:
+                            if playerDino.rect.bottom == int(0.98*height) and not playerDino.isDucking:
+                                playerDino.isJumping = True
+                                playerDino.movement[1] = -1*playerDino.jumpSpeed
+                    for ptera in pteras:
+                        if (ptera.rect.x - playerDino.rect.x) < 50 and ptera.rect.x > 0:
+                            if not (playerDino.isJumping or playerDino.isDead):
+                                playerDino.isDucking = True
+                        else:
+                            playerDino.isDucking = False
 
 
                 for event in pygame.event.get():
@@ -389,7 +385,7 @@ def gameplay():
                         gameQuit = True
                         gameOver = True
 
-                    if event.type == pygame.KEYDOWN:
+                    if not aiActivated and event.type == pygame.KEYDOWN:
                         if (event.key == pygame.K_SPACE) and not playerDino.isDucking:
                             if playerDino.rect.bottom == int(0.98*height):
                                 playerDino.isJumping = True
@@ -399,7 +395,7 @@ def gameplay():
                             if not (playerDino.isJumping and playerDino.isDead):
                                 playerDino.isDucking = True
 
-                    if event.type == pygame.KEYUP:
+                    if not aiActivated and event.type == pygame.KEYUP:
                         if event.key == pygame.K_DOWN:
                             playerDino.isDucking = False
             for c in cacti:
