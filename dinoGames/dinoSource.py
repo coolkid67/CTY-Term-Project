@@ -22,7 +22,7 @@ pygame.display.set_caption("T-Rex Rush")
 
 def shouldJump(dino, obstacle, gamespeed):
     # should the dinosaur jump given that the closest obstacle is obstacle?
-    return (cactus.rect.x - playerDino.rect.x) < 25 * gamespeed and cactus.rect.x > 0
+    return (obstacle.rect.x - dino.rect.x) < 25 * gamespeed and obstacle.rect.x > 0
 
 def load_image (name, sizex = -1, sizey = -1, colorkey=None):
     fullname = os.path.join('sprites', name)
