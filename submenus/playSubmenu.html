@@ -1,195 +1,27 @@
-<!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>
+            Dino Game solo
+        </title>
         <style>
-            body, html {
-                height: 100%;
-                margin: 0;  
-                background-image: url("backgrounds/playerBackground.jpg");
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
-                z-index: -1;
-            }
-            .button1 {
-                position: absolute;
-                background-color: transparent;
-                color: black;
-                border: 7px solid #e7e7e7;
-                font-size: 100px;
-                padding: 50px 100px;
-                border-radius: 100px;
-                transition-duration: 0.3s;
-                transition-duration: 0.3s;
-                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
-                    0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                margin-bottom: 100px;
-                margin-left:100px;
-                margin-right:100px;
-                margin-top: 100px;
-            }
-
-            .button1:hover {
-                background-color: #e7e7e7;
-                box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-                    0 17px 50px 0 rgba(0, 0, 0, 0.19);
-            }
-            .button1 span {
-                cursor: pointer;
-                display: inline-block;
-                position: relative;
-                transition: 0.5s;
-            }
-
-            .button1 span:after {
-                content: "\00bb";
-                position: absolute;
-                opacity: 0;
-                top: 0;
-                right: -60px;
-                transition: 0.5s;
-            }
-
-            .button1:hover span {
-                padding-right: 70px;
-            }
-
-            .button1:hover span:after {
-                opacity: 2;
-                right: 0;
-            }
-            .button1:active {
-                background-color: #a9a9a9;
-                box-shadow: 0 5px #666;
-                transform: translateY(2px);
-            }
-            .button2 {
-                position: absolute;
-                top: 370px;
-                background-color: transparent;
-                color: black;
-                border: 7px solid #e7e7e7;
-                font-size: 100px;
-                padding: 50px 100px;
-                border-radius: 100px;
-                transition-duration: 0.3s;
-                transition-duration: 0.3s;
-                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
-                    0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                margin-bottom: 100px;
-                margin-left:100px;
-                margin-right:100px;
-                margin-top: 100px;
-            }
-
-            .button2:hover {
-                background-color: #e7e7e7;
-                box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-                    0 17px 50px 0 rgba(0, 0, 0, 0.19);
-            }
-            .button2 span {
-                cursor: pointer;
-                display: inline-block;
-                position: relative;
-                transition: 0.5s;
-            }
-
-            .button2 span:after {
-                content: "\00bb";
-                position: absolute;
-                opacity: 0;
-                top: 0;
-                right: -60px;
-                transition: 0.5s;
-            }
-
-            .button2:hover span {
-                padding-right: 70px;
-            }
-
-            .button2:hover span:after {
-                opacity: 2;
-                right: 0;
-            }
-            .button2:active {
-                background-color: #a9a9a9;
-                box-shadow: 0 5px #666;
-                transform: translateY(2px);
-            }
-            .button3 {
-                position: absolute;
-                top: 700px;
-                background-color: transparent;
-                color: black;
-                border: 7px solid #e7e7e7;
-                font-size: 20px;
-                padding: 25px 50px;
-                border-radius: 100px;
-                transition-duration: 0.3s;
-                transition-duration: 0.3s;
-                box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2),
-                    0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                margin-bottom: 100px;
-                margin-left:100px;
-                margin-right:100px;
-                margin-top: 100px;
-            }
-
-            .button3:hover {
-                background-color: #e7e7e7;
-                box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-                    0 17px 50px 0 rgba(0, 0, 0, 0.19);
-            }
-            .button3 span {
-                cursor: pointer;
-                display: inline-block;
-                position: relative;
-                transition: 0.5s;
-            }
-
-            .button3 span:after {
-                content: "\00bb";
-                position: absolute;
-                opacity: 0;
-                top: 0;
-                right: -60px;
-                transition: 0.5s;
-            }
-
-            .button3:hover span {
-                padding-right: 70px;
-            }
-
-            .button3:hover span:after {
-                opacity: 2;
-                right: 0;
-            }
-            .button3:active {
-                background-color: #a9a9a9;
-                box-shadow: 0 5px #666;
-                transform: translateY(2px);
+            #github{
+                height: 5%;
             }
         </style>
     </head>
     <body>
-        <button
-            class="button1"
-            onclick="window.location.href = 'https://coolkid67.github.io/CTY-Term-Project/dinoGames/dinoGameSolo.html';"
-        >
-            <span><font color="white">Play Solo</font></span>
-        </button><br>
-        <button
-            class="button2"
-            onclick="window.location.href = 'https://coolkid67.github.io/CTY-Term-Project/dinoGames/dinoGameVersus.html';"
-        >
-            <span><font color = "white">VS AI</font></span>
-        </button>
-        <button
-            class="button3"
-            onclick="window.location.href = 'https://coolkid67.github.io/CTY-Term-Project/index.html';"
-        >
-            <span><font color = "white">Back</font></span>
-        </button>
+       <a href="https://github.com/coolkid67/CTY-Term-Project/blob/master/dinoGames/dinoSource.py"><img id="github" src="sprites/github.png" alt="github raw code"/></a>
+            
+        
+        <iframe
+            height="95%"
+            width="100%"
+            src="https://repl.it/@Xeldo2000/DINO-GAME-SOLO?lite=true"
+            scrolling="no"
+            frameborder="no"
+            allowtransparency="true"
+            allowfullscreen="true"
+            sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"
+        ></iframe>
     </body>
 </html>
