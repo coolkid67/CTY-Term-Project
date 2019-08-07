@@ -31,7 +31,7 @@ def load_image (name, sizex = -1, sizey = -1, colorkey=None):
     if colorkey is not None:
         if colorkey is -1:
             colorkey = image.get_at((0, 0))
-        image.set_colorkey(colorkey, RLEACCEL)
+        image.set_colorkey(colorkey, pygame.RLEACCEL)
 
     if sizex != -1 or sizey != -1:
         image = pygame.transform.scale(image, (sizex, sizey))
@@ -67,7 +67,7 @@ def load_sprite_sheet(
             if colorkey is not None:
                 if colorkey is -1:
                     colorkey = image.get_at((0,0))
-                image.set_colorkey(colorkey,RLEACCEL)
+                image.set_colorkey(colorkey, pygame.RLEACCEL)
 
             if scalex != -1 or scaley != -1:
                 image = pygame.transform.scale(image,(scalex,scaley))
