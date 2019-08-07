@@ -1,106 +1,22 @@
 <html>
     <head>
-        <script
-            src="http://www.skulpt.org/js/skulpt.min.js"
-            type="text/javascript"
-        ></script>
-        <script
-            src="http://www.skulpt.org/js/skulpt-stdlib.js"
-            type="text/javascript"
-        ></script>
+        <title>
+            Dino Game solo
+        </title>
     </head>
     <body>
-        <script type="text/javascript">
-
-            // output functions are configurable.  This one just appends some text
-            // to a pre element.
-            function outf(text) {
-                var mypre = document.getElementById("output");
-                mypre.innerHTML = mypre.innerHTML + text;
-            }
-            function builtinRead(x) {
-                if (Sk.builtInFiles === undefined || Sk.builtInFiles["files"][x] === undefined) {
-                    throw "File not found: '" + x + "'";
-                } else {
-                    return Sk.builtinFiles["files"][x];
-                };
-            };
-            // Here's everything you need to run a python program in skulpt
-            // grab the code from your textarea
-            // get a reference to your pre element for output
-            // configure the output function
-            // call Sk.importMainWithBody()
-            
-            function runit() {
-                var basePath = 'pygame/';
-                Sk.externalLibraries = {
-                    'pygame': {
-                        path: basePath + '__init__.js',
-                    },
-                    'pygame.display': {
-                        path: basePath + 'display.js',
-                    },
-                    'pygame.draw': {
-                        path: basePath + 'draw.js',
-                    },
-                    'pygame.event': {
-                        path: basePath + 'event.js',
-                    },
-                    'pygame.font': {
-                        path: basePath + 'font.js',
-                    },
-                    'pygame.image': {
-                        path: basePath + 'image.js',
-                    },
-                    'pygame.key': {
-                        path: basePath + 'key.js',
-                    },
-                    'pygame.mouse': {
-                        path: basePath + 'mouse.js',
-                    },
-                    'pygame.time': {
-                        path: basePath + 'time.js',
-                    },
-                    'pygame.transform': {
-                        path: basePath + 'transform.js',
-                    },
-                    'pygame.version': {
-                        path: basePath + 'version.js',
-                    },
-                };
-
-                Sk.main_canvas = document.createElement("canvas");
-                Sk.main_canvas.parentElement = document.body;
-                console.log(Sk.main_canvas);
-                Sk.main_canvas.style.backgroundColor = "black";
-
-                var client = new XMLHttpRequest();
-                client.open('GET', 'dinoSource.py');
-                client.onreadystatechange = function() {
-                    var prog = client.responseText;
-                    console.log(prog);
-                    var mypre = document.getElementById("output");
-                    mypre.innerHTML = "";
-                    Sk.pre = "output";
-                    Sk.configure({ output: outf, read: builtinRead });
-                    (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target =
-                        "mycanvas";
-                    var myPromise = Sk.misceval.asyncToPromise(function() {
-                        return Sk.importMainWithBody("<stdin>", false, prog, true);
-                    });
-                    myPromise.then(
-                        function(mod) {
-                            console.log("success");
-                        },
-                        function(err) {
-                            console.log(err.toString());
-                        }
-                    );
-                }
-            }
-        </script>
-        <button type="button" onclick="runit()">Run</button>
-        <pre id="output"></pre>
-        <div class = ""></div>
+        <button>
+            <img src="backgrounds\github.png" alt="github raw code" />
+        </button>
+        <iframe
+            height="95%"
+            width="100%"
+            src="https://repl.it/@coolkid67/ChillyFlawlessSection?lite=true"
+            scrolling="no"
+            frameborder="no"
+            allowtransparency="true"
+            allowfullscreen="true"
+            sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"
+        ></iframe>
     </body>
 </html>
