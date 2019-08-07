@@ -20,6 +20,10 @@ screen = pygame.display.set_mode(scr_size)
 clock = pygame.time.Clock()
 pygame.display.set_caption("T-Rex Rush")
 
+def shouldJump(dino, obstacle, gamespeed):
+    # should the dinosaur jump given that the closest obstacle is obstacle?
+    return (cactus.rect.x - playerDino.rect.x) < 25 * gamespeed and cactus.rect.x > 0
+
 def load_image (name, sizex = -1, sizey = -1, colorkey=None):
     fullname = os.path.join('sprites', name)
     image = pygame.image.load(fullname)
@@ -368,7 +372,7 @@ def gameplay():
             else:
                 if aiActivated:
                     for cactus in cacti:
-                        if (cactus.rect.x - playerDino.rect.x) < 25 * gamespeed and cactus.rect.x > 0:
+                        if shouldJump(playerDino, cactus, gamespeed):
                             if playerDino.rect.bottom == int(0.98*height) and not playerDino.isDucking:
                                 playerDino.isJumping = True
                                 playerDino.movement[1] = -1*playerDino.jumpSpeed
@@ -455,7 +459,7 @@ def gameplay():
                 if playerDino.score > high_score:
                     high_score = playerDino.score
 
-            if counter%700 == 699:
+            if counter % 700 == 699:
                 new_ground.speed -= 1
                 gamespeed += 1
 
