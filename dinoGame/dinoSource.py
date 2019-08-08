@@ -285,7 +285,7 @@ def introscreen():
     temp_dino.isBlinking = True
     gameStart = False
 
-    callout,callout_rect = load_image('call_out.png',196,45,-1)
+    callout,callout_rect = load_image('call-out.png',196,45,-1)
     callout_rect.left = width*0.05
     callout_rect.top = height*0.4
 
