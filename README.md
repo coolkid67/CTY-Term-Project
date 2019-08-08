@@ -14,10 +14,10 @@
     </h2>
     <ul>
       <li>
-        <a href = "https://python.org/">Python</a> and <a href = "https://pygame.org">pygame</a>
+        <a href = "https://python.org/">Python</a> and <a href = "https://pygame.org">Pygame</a>
       </li>
       <li>
-        <a href = "https://github.com/shivamshekhar/Chrome-T-Rex-Rush">Shivam Shekar's Python Dino Game implementation</a>
+        <a href = "https://github.com/shivamshekhar/Chrome-T-Rex-Rush">Shivam Shekhar's Python Dino Game implementation</a>
       </li>
       <li>
         <a href = "https://perso.limsi.fr/pointal/_media/python:cours:mementopython3-english.pdf">Limsi's Python cheat sheet</a>
