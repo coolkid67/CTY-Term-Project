@@ -4,7 +4,6 @@ import os, pygame, random
 import math as math2 # since pygame.math will be math with `from pygame import *`
 from pygame import *
 
-
 pygame.mixer.pre_init(44100, -16, 2, 2048) # fix audio delay 
 pygame.init()
 
