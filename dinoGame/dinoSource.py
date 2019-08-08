@@ -312,11 +312,12 @@ def introscreen():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return True
-                if event.type == pygame.KEYDOWN:
+                if event.type == pygame.KEYDOWN and not temp_dino.isJumping:
                     if (event.key == pygame.K_SPACE or event.key == pygame.K_UP):
                         temp_dino.isJumping = True
                         temp_dino.isBlinking = False
                         temp_dino.movement[1] = temp_dino.jumpSpeed * -1.0
+                        aiActivated = False
                     elif (event.key == pygame.K_RETURN):
                         temp_dino.isJumping = True
                         temp_dino.isBlinking = False
