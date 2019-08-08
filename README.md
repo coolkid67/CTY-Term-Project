@@ -1,7 +1,7 @@
 <html>
   <body>
     <h1>
-      <a href = "https://coolkid67.github.io/CTY-Term-Project/">Dino game / T-Rex Rush Game + AI</a>
+      <a href = "https://coolkid67.github.io/CTY-Term-Project/">Chrome Dino Game + Bot</a>
     </h1>
     <h2>
       How to play:
@@ -17,7 +17,7 @@
         <a href = "https://python.org/">Python</a> and <a href = "https://pygame.org">pygame</a>
       </li>
       <li>
-        <a href = "https://github.com/shivamshekhar/Chrome-T-Rex-Rush">Shivam Shekar's Python dino game implementation</a>
+        <a href = "https://github.com/shivamshekhar/Chrome-T-Rex-Rush">Shivam Shekar's Python Dino Game implementation</a>
       </li>
       <li>
         <a href = "https://perso.limsi.fr/pointal/_media/python:cours:mementopython3-english.pdf">Limsi's Python cheat sheet</a>
@@ -27,13 +27,13 @@
       Original goal:
     </h2>
     <p>
-       The project was originally supposed to make a neural network that learns to solve <a href = "https://github.com/shivamshekhar/Chrome-T-Rex-Rush">this dino game</a>. Due to lack of experience with neural networks, and the topic's complexity, we were unable to finish this in the amount of time we had. We also wanted to make the program to all be handled through a website so that others can easily view the project. We tried using <a href = "https://skulpt.org/">Skulpt</a> (a Python interpreter written in JavaScript) and <a href = "https://brython.info">Brython, </a> (a Python to JavaScript compiler) but were inexperienced with JavaScript and had trouble configuring the programs to handle Pygame properly.
+       The project was originally supposed to make a neural network that learns to solve <a href = "https://github.com/shivamshekhar/Chrome-T-Rex-Rush">this Dino Game implementation</a>. Due to lack of experience with neural networks, and the topic's complexity, we were unable to finish this in the amount of time we had. We also wanted to make the program to all be handled through a website so that others can easily view the project. We tried using <a href = "https://skulpt.org/">Skulpt</a> (a Python interpreter written in JavaScript) and <a href = "https://brython.info">Brython, </a> (a Python to JavaScript compiler) but were inexperienced with JavaScript and had trouble configuring the programs to handle Pygame properly.
     </p>
     <h2>
       How we changed our goal:
     </h2>
     <p> 
-       Since the dino game is a relatively simple game, we were able to use a hardcoded bot which had a list of instructions to follow rather than gradually learning through trial and error. Instead of hosting the game on our own website, we were able to embed our project from <a href="https://repl.it">repl.it</a>, which worked out with us making it open-source. The website allowed us to run the library Pygame much more easily than with either Skulpt and Brython.
+       Since the Chrome Dino Game is a relatively simple game, we were able to use a hardcoded bot which had a list of instructions to follow rather than gradually learning through trial and error. Instead of hosting the game on our own website, we were able to embed our project from <a href="https://repl.it">repl.it</a>, which worked out with us making it open-source. The website allowed us to run the library Pygame much more easily than with either Skulpt and Brython.
     </p>
     <h2>
        Curriculum topics involved in this program:
