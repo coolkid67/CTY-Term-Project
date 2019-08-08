@@ -1,28 +1,35 @@
 __author__ = "Shivam Shekhar"
 
 import os, pygame, random
+import math as math2 # since pygame.math will be math with `from pygame import *`
 from pygame import *
+
 
 pygame.mixer.pre_init(44100, -16, 2, 2048) # fix audio delay 
 pygame.init()
 
-scr_size = (width,height) = (650,150)
+scr_size = (width, height) = (750, 150)
 FPS = 60
 gravity = 0.6
 
-black = (0,0,0)
-white = (255,255,255)
-background_col = (235,235,235)
+black = (0, 0, 0)
+white = (255, 255, 255)
+background_col = (255, 255, 175)
+
+aiActivated = False # default to false
 
 high_score = 0
+arial = pygame.font.Font("ARLRDBD.TTF", 25)
 
 screen = pygame.display.set_mode(scr_size)
 clock = pygame.time.Clock()
-pygame.display.set_caption("T-Rex Rush")
+pygame.display.set_caption("Chrome Dino Game")
 
 def shouldJump(dino, obstacle, gamespeed):
     # should the dinosaur jump given that the closest obstacle is obstacle?
-    return (obstacle.rect.x - dino.rect.x) < 25 * gamespeed and obstacle.rect.x > 0
+    cactuDist = obstacle.rect.x - dino.rect.x # distance from the obstacle
+    multiplier = gamespeed * math2.pow(1.01, gamespeed)
+    return cactuDist < 25 * multiplier and obstacle.rect.x > 25
 
 def load_image (name, sizex = -1, sizey = -1, colorkey=None):
     fullname = os.path.join('sprites', name)
@@ -31,7 +38,7 @@ def load_image (name, sizex = -1, sizey = -1, colorkey=None):
     if colorkey is not None:
         if colorkey is -1:
             colorkey = image.get_at((0, 0))
-        image.set_colorkey(colorkey, pygame.RLEACCEL)
+        image.set_colorkey(colorkey, RLEACCEL)
 
     if sizex != -1 or sizey != -1:
         image = pygame.transform.scale(image, (sizex, sizey))
@@ -67,7 +74,7 @@ def load_sprite_sheet(
             if colorkey is not None:
                 if colorkey is -1:
                     colorkey = image.get_at((0,0))
-                image.set_colorkey(colorkey, pygame.RLEACCEL)
+                image.set_colorkey(colorkey,RLEACCEL)
 
             if scalex != -1 or scaley != -1:
                 image = pygame.transform.scale(image,(scalex,scaley))
@@ -134,7 +141,7 @@ class Dino():
 
     def update(self):
         if self.isJumping:
-            self.movement[1] = self.movement[1] + gravity
+            self.movement[1] = self.movement[1] + (self.isDucking and 2.5 or gravity)
 
         if self.isJumping:
             self.index = 0
@@ -281,6 +288,7 @@ class Scoreboard():
 
 
 def introscreen():
+    global aiActivated
     temp_dino = Dino(44,47)
     temp_dino.isBlinking = True
     gameStart = False
@@ -305,10 +313,16 @@ def introscreen():
                 if event.type == pygame.QUIT:
                     return True
                 if event.type == pygame.KEYDOWN:
-                    if not temp_dino.isDucking and (event.key == pygame.K_SPACE or event.key == pygame.K_UP):
+                    if (event.key == pygame.K_SPACE or event.key == pygame.K_UP):
                         temp_dino.isJumping = True
                         temp_dino.isBlinking = False
-                        temp_dino.movement[1] = -1*temp_dino.jumpSpeed
+                        temp_dino.movement[1] = temp_dino.jumpSpeed * -1.0
+                    elif (event.key == pygame.K_RETURN):
+                        temp_dino.isJumping = True
+                        temp_dino.isBlinking = False
+                        temp_dino.movement[1] = temp_dino.jumpSpeed * -0.5
+                        aiActivated = True
+
 
         temp_dino.update()
 
@@ -320,6 +334,12 @@ def introscreen():
                 screen.blit(callout,callout_rect)
             temp_dino.draw()
 
+            text = arial.render("Press enter to watch AI. Press space to play!", True, black)
+            textRect = text.get_rect()
+            textRect.center = (width // 2, height // 4)
+            screen.blit(text, textRect)
+
+
             pygame.display.update()
 
         clock.tick(FPS)
@@ -327,7 +347,6 @@ def introscreen():
             gameStart = True
 
 def gameplay():
-    aiActivated = True
     global high_score
     gamespeed = 4
     startMenu = False
@@ -349,7 +368,7 @@ def gameplay():
     Cloud.containers = clouds
 
     retbutton_image,retbutton_rect = load_image('replay_button.png',35,31,-1)
-    gameover_image,gameover_rect = load_image('game_over.png',190,11,-1)
+    gameover_image,gameover_rect = load_image('game_over.png',113,11,-1)
 
     temp_images,temp_rect = load_sprite_sheet('numbers.png',12,1,11,int(11*6/5),-1)
     HI_image = pygame.Surface((22,int(11*6/5)))
@@ -371,17 +390,26 @@ def gameplay():
                 gameOver = True
             else:
                 if aiActivated:
-                    for cactus in cacti:
-                        if shouldJump(playerDino, cactus, gamespeed):
-                            if playerDino.rect.bottom == int(0.98*height) and not playerDino.isDucking:
-                                playerDino.isJumping = True
-                                playerDino.movement[1] = -1*playerDino.jumpSpeed
+                    closestPteraDist = width
                     for ptera in pteras:
-                        if (ptera.rect.x - playerDino.rect.x) < 50 and ptera.rect.x > 0:
-                            if not (playerDino.isJumping or playerDino.isDead):
+                        pteraDist = ptera.rect.x - playerDino.rect.x
+                        closestPteraDist = pteraDist < closestPteraDist and pteraDist or closestPteraDist
+
+                        if pteraDist < 50 and ptera.rect.x > 25:
+                            if not (playerDino.isDead or playerDino.isJumping):
                                 playerDino.isDucking = True
                         else:
                             playerDino.isDucking = False
+                    for cactus in cacti:
+                        if shouldJump(playerDino, cactus, gamespeed) and not playerDino.isJumping and (closestPteraDist > gamespeed or closestPteraDist < 25):
+                            if playerDino.rect.bottom == int(0.98*height) and not playerDino.isDucking:
+                                playerDino.isJumping = True
+                                playerDino.movement[1] = -1 * playerDino.jumpSpeed
+                        elif cactus.rect.x < 25 and not playerDino.isDead:
+                            if playerDino.rect.bottom != int(0.98 * height):
+                                playerDino.isDucking = True
+                            else:
+                                playerDino.isDucking = False
 
 
                 for event in pygame.event.get():
@@ -485,7 +513,7 @@ def gameplay():
 
                         if event.key == pygame.K_RETURN or event.key == pygame.K_SPACE:
                             gameOver = False
-                            gameplay()
+                            main()
             highsc.update(high_score)
             if pygame.display.get_surface() != None:
                 disp_gameOver_msg(retbutton_image,gameover_image)
